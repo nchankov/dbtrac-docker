@@ -1,1 +1,1 @@
-docker build -t chankov/dbtrac-full .
+docker build -t chankov/dbtrac-docker .
