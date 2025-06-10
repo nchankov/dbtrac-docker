@@ -25,18 +25,18 @@ RUN echo "include /etc/nginx/stream.conf.d/*.conf;" >> /etc/nginx/nginx.conf
 # create the root directory
 RUN mkdir /dbtrac
 # Create RW and RO files
-RUN mkdir /dbtrac/snippets
-RUN touch /dbtrac/snippets/source.servers
-RUN touch /dbtrac/snippets/replica.servers
-RUN echo "server localhost:3306;" >> /dbtrac/snippets/source.servers
-RUN echo "server localhost:3306;" >> /dbtrac/snippets/replica.servers
+RUN mkdir /etc/nginx/snippets
+RUN touch /etc/nginx/source.servers
+RUN touch /etc/nginx/replica.servers
+RUN echo "server localhost:3306;" >> /etc/nginx/snippets/source.servers
+RUN echo "server localhost:3306;" >> /etc/nginx/snippets/replica.servers
 
 # Create shortcut commands
-RUN ln -s /dbtrac/bin/add.sh /add
-RUN ln -s /dbtrac/bin/remove.sh /remove
-RUN ln -s /dbtrac/bin/change.sh /change
-RUN ln -s /dbtrac/bin/monitor.sh /monitor
-RUN ln -s /dbtrac/bin/status.sh /status
+RUN ln -s /usr/local/lib/dbtrac/bin/add.sh /add
+RUN ln -s /usr/local/lib/dbtrac/bin/remove.sh /remove
+RUN ln -s /usr/local/lib/dbtrac/bin/change.sh /change
+RUN ln -s /usr/local/lib/dbtrac/bin/monitor.sh /monitor
+RUN ln -s /usr/local/lib/dbtrac/bin/status.sh /status
 
 COPY ./dbtrac.conf /etc/nginx/stream.conf.d/
 COPY ./35-dbtrac-monitor.sh /docker-entrypoint.d/
